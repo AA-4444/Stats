@@ -38,234 +38,241 @@ struct StatsView: View {
     @ObservedObject var cpuStats = CPUStats()
    
     var body: some View {
-        HStack {
-           //MARK: Wi-Fi
-            VStack(alignment: .center, spacing: 15) {
-                      Text("WI-FI")
-                          .font(.headline)
-                          .padding(.bottom, 5)
-
-                      ZStack {
-                          Circle()
-                              .stroke(lineWidth: 5)
-                              .opacity(0.3)
-                              .foregroundColor(.blue)
-
-                          Circle()
-                              .trim(from: 0.0, to: wifiMonitor.isWiFiActive ? 1.0 : 0.0)
-                              .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round))
-                              .foregroundColor(.blue)
-                              .rotationEffect(Angle(degrees: -90))
-                              .animation(.easeInOut, value: wifiMonitor.isWiFiActive)
-
-                          VStack {
-                              Image(systemName: "wifi")
-                                  .symbolRenderingMode(.hierarchical)
-                                  .font(.system(size: 15))
-                                  .foregroundColor(wifiMonitor.isWiFiActive ? .blue : .gray)
-
-                              Text(wifiMonitor.isWiFiActive ? "Active" : "Inactive")
-                                  .font(.caption)
-                                  .bold()
-                                  .foregroundColor(.blue)
-                          }
-                      }
-                      .frame(width: 65, height: 65)
-
-                      VStack(alignment: .leading, spacing: 10) {
-                          HStack {
-                              Image(systemName: "arrow.up")
-                                  .foregroundColor(.blue).bold()
-                              Text(wifiMonitor.uploadSpeed)
-                                  .bold()
-                                  .font(.system(size: 12))
-                          }
-
-                          HStack {
-                              Image(systemName: "arrow.down")
-                                  .foregroundColor(.blue).bold()
-                              Text(wifiMonitor.downloadSpeed)
-                                  .bold()
-                                  .font(.system(size: 12))
-                          }
-                      }
-                  }
-            .padding()
-            .frame(width: 130)
-
+        VStack(spacing: 0) {
             
-            //MARK: Disk space
-            VStack(alignment: .center, spacing: 15) {
-                Text("Disk Usage")
-                    .font(.headline)
-                    .padding(5)
-                
-                ZStack {
+            HStack {
+                //MARK: Wi-Fi
+                VStack(alignment: .center, spacing: 15) {
+                    Text("WI-FI")
+                        .font(.headline)
+                        .padding(.bottom, 5)
                     
-                    
-                    // Circular Progress for Disk Usage
-                    Circle()
-                        .stroke(lineWidth: 5)
-                        .opacity(0.3)
-                        .foregroundColor(.blue)
-
-                    Circle()
-                        .trim(from: 0.0, to: CGFloat(diskStats.usedPercentage))
-                        .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round))
-                        .foregroundColor(.blue)
-                        .rotationEffect(.degrees(-90))
-                        .animation(.easeInOut, value: diskStats.usedPercentage)
-
-                
-                    VStack {
-                        Image(systemName: "opticaldiscdrive")
-                            .symbolRenderingMode(.hierarchical)
-                            .font(.system(size: 20))
-                            .foregroundColor(.blue)
-
-                        Text("\(Int(diskStats.usedPercentage * 100))%")
-                            .font(.caption)
-                            .bold()
-                            .foregroundColor(.blue)
-                    }
-                }
-                .frame(width: 65, height: 65)
-                
-                VStack(alignment: .leading, spacing: 10) {
-                  
-
-                    Text("Used: \(diskStats.usedSpace) GB").bold()
-                        .font(.system(size: 12))
-                        
-
-                    Text("Free: \(diskStats.freeSpace) GB")
-                        .bold()
-                        .font(.system(size: 12))
-                }
-            }
-            .padding()
-            .frame(width: 130)
-            
-            //MARK: Virtual Memoery Usafe
-            VStack(alignment: .center, spacing: 15) {
-                Text("Memory Usage")
-                    .font(.headline)
-                    .padding(.bottom, 5)
-                
-                ZStack {
-                    // Circular Progress View
-                    Circle()
-                        .stroke(lineWidth: 5)
-                        .opacity(0.3)
-                        .foregroundColor(.blue)
-                    
-                    Circle()
-                        .trim(from: 0.0, to: CGFloat(memoryStats.freePercentage))
-                        .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round))
-                        .foregroundColor(.blue)
-                        .rotationEffect(Angle(degrees: -90))
-                    
-                    // Memory Chip Icon
-                    VStack {
-                        Image(systemName: "memorychip")
-                            .symbolRenderingMode(.hierarchical)
-                            .font(.system(size: 20))
+                    ZStack {
+                        Circle()
+                            .stroke(lineWidth: 5)
+                            .opacity(0.3)
                             .foregroundColor(.blue)
                         
-                        Text("\(Int(memoryStats.freePercentage * 100))%")
-                            .font(.caption)
-                            .bold()
+                        Circle()
+                            .trim(from: 0.0, to: wifiMonitor.isWiFiActive ? 1.0 : 0.0)
+                            .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round))
                             .foregroundColor(.blue)
+                            .rotationEffect(Angle(degrees: -90))
+                            .animation(.easeInOut, value: wifiMonitor.isWiFiActive)
+                        
+                        VStack {
+                            Image(systemName: "wifi")
+                                .symbolRenderingMode(.hierarchical)
+                                .font(.system(size: 15))
+                                .foregroundColor(wifiMonitor.isWiFiActive ? .blue : .gray)
+                            
+                            Text(wifiMonitor.isWiFiActive ? "Active" : "Inactive")
+                                .font(.caption)
+                                .bold()
+                                .foregroundColor(.blue)
+                        }
+                    }
+                    .frame(width: 65, height: 65)
+                    
+                    VStack(alignment: .leading, spacing: 10) {
+                        HStack {
+                            Image(systemName: "arrow.up")
+                                .foregroundColor(.blue).bold()
+                            Text(wifiMonitor.uploadSpeed)
+                                .bold()
+                                .font(.system(size: 12))
+                        }
+                        
+                        HStack {
+                            Image(systemName: "arrow.down")
+                                .foregroundColor(.blue).bold()
+                            Text(wifiMonitor.downloadSpeed)
+                                .bold()
+                                .font(.system(size: 12))
+                        }
                     }
                 }
-                .frame(width: 65, height: 65)
+                .padding()
+                .frame(width: 130)
                 
-                // Detailed Statistics
-                VStack(alignment: .leading, spacing: 10) {
-                    HStack {
-                        Text("Free:").bold()
-                            .font(.system(size: 12))
-                        Spacer()
-                        Text("\(memoryStats.free) MB")
-                            .font(.system(size: 12)).bold()
+                
+                //MARK: Disk space
+                VStack(alignment: .center, spacing: 15) {
+                    Text("Disk")
+                        .font(.headline)
+                        .padding(5)
+                    
+                    ZStack {
+                        
+                        
+                        // Circular Progress for Disk Usage
+                        Circle()
+                            .stroke(lineWidth: 5)
+                            .opacity(0.3)
+                            .foregroundColor(.blue)
+                        
+                        Circle()
+                            .trim(from: 0.0, to: CGFloat(diskStats.usedPercentage))
+                            .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round))
+                            .foregroundColor(.blue)
+                            .rotationEffect(.degrees(-90))
+                            .animation(.easeInOut, value: diskStats.usedPercentage)
+                        
+                        
+                        VStack {
+                            Image(systemName: "opticaldiscdrive")
+                                .symbolRenderingMode(.hierarchical)
+                                .font(.system(size: 20))
+                                .foregroundColor(.blue)
+                            
+                            Text("\(Int(diskStats.usedPercentage * 100))%")
+                                .font(.caption)
+                                .bold()
+                                .foregroundColor(.blue)
+                        }
                     }
-                    HStack {
-                        Text("Active:").bold()
+                    .frame(width: 65, height: 65)
+                    
+                    VStack(alignment: .leading, spacing: 10) {
+                        
+                        
+                        Text("Used: \(diskStats.usedSpace) GB").bold()
                             .font(.system(size: 12))
-                        Spacer()
-                        Text("\(memoryStats.active) MB")
-                            .font(.system(size: 12)).bold()
+                        
+                        
+                        Text("Free: \(diskStats.freeSpace) GB")
+                            .bold()
+                            .font(.system(size: 12))
                     }
-//                    HStack {
-//                        Text("Inactive:").bold()
-//                        Spacer()
-//                        Text("\(memoryStats.inactive) MB")
-//                    }
-//                    HStack {
-//                        Text("Wired:").bold()
-//                        Spacer()
-//                        Text("\(memoryStats.wired) MB")
-//                    }
-//                    Divider()
-//                    HStack {
-//                        Text("Total:").bold()
-//                        Spacer()
-//                        Text("\(memoryStats.total) MB")
-//                    }
                 }
-                
+                .padding()
+                .frame(width: 130)
             }
-            .padding()
-            .frame(width: 150)
+           // .background(.green)
+            .padding(.horizontal, 0)
             
-            //MARK: CPU
-            VStack(alignment: .center, spacing: 15) {
-                       Text("CPU Usage")
-                           .font(.headline)
-                           .padding(5)
-
-                       ZStack {
-                         
-                           Circle()
-                               .stroke(lineWidth: 5)
-                               .opacity(0.3)
-                               .foregroundColor(.blue)
-
-                             Circle()
-                               .trim(from: 0.0, to: CGFloat(cpuStats.usage / 100))
-                               .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round))
-                               .foregroundColor(.blue)
-                               .rotationEffect(.degrees(-90))
-                               .animation(.easeInOut, value: cpuStats.usage)
-
-                           
-                           VStack {
-                               Image(systemName: "cpu")
-                                   .symbolRenderingMode(.hierarchical)
-                                   .font(.system(size: 20))
-                                   .foregroundColor(.blue)
-
-                               Text("\(String(format: "%.1f", cpuStats.usage))%")
-                                   .font(.caption)
-                                   .bold()
-                                   .foregroundColor(.blue)
-                           }
-                       }
-                       .frame(width: 65, height: 65)
-
-                       VStack(alignment: .leading, spacing: 10) {
-                           Text("Total Usage: \(String(format: "%.1f", cpuStats.usage))%")
-                               .bold()
-                               .font(.system(size: 12))
-                           Text("Cores: \(ProcessInfo.processInfo.processorCount)")
-                               .bold()
-                               .font(.system(size: 12))
-                       }
-                   }
-                   .padding()
-                   .frame(width: 130)
+            HStack {
+                //MARK: Virtual Memoery Usafe
+                VStack(alignment: .center, spacing: 15) {
+                    Text("Memory")
+                        .font(.headline)
+                        .padding(.bottom, 5)
+                    
+                    ZStack {
+                        // Circular Progress View
+                        Circle()
+                            .stroke(lineWidth: 5)
+                            .opacity(0.3)
+                            .foregroundColor(.blue)
+                        
+                        Circle()
+                            .trim(from: 0.0, to: CGFloat(memoryStats.freePercentage))
+                            .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round))
+                            .foregroundColor(.blue)
+                            .rotationEffect(Angle(degrees: -90))
+                        
+                        // Memory Chip Icon
+                        VStack {
+                            Image(systemName: "memorychip")
+                                .symbolRenderingMode(.hierarchical)
+                                .font(.system(size: 20))
+                                .foregroundColor(.blue)
+                            
+                            Text("\(Int(memoryStats.freePercentage * 100))%")
+                                .font(.caption)
+                                .bold()
+                                .foregroundColor(.blue)
+                        }
+                    }
+                    .frame(width: 65, height: 65)
+                    
+                    // Detailed Statistics
+                    VStack(alignment: .leading, spacing: 10) {
+                        HStack {
+                            Text("Free:").bold()
+                                .font(.system(size: 12))
+                            Spacer()
+                            Text("\(memoryStats.free) MB")
+                                .font(.system(size: 12)).bold()
+                        }
+                        HStack {
+                            Text("Active:").bold()
+                                .font(.system(size: 12))
+                            Spacer()
+                            Text("\(memoryStats.active) MB")
+                                .font(.system(size: 12)).bold()
+                        }
+                        //                    HStack {
+                        //                        Text("Inactive:").bold()
+                        //                        Spacer()
+                        //                        Text("\(memoryStats.inactive) MB")
+                        //                    }
+                        //                    HStack {
+                        //                        Text("Wired:").bold()
+                        //                        Spacer()
+                        //                        Text("\(memoryStats.wired) MB")
+                        //                    }
+                        //                    Divider()
+                        //                    HStack {
+                        //                        Text("Total:").bold()
+                        //                        Spacer()
+                        //                        Text("\(memoryStats.total) MB")
+                        //                    }
+                    }
+                    
+                }
+                .padding()
+                .frame(width: 130)
+                
+                //MARK: CPU
+                VStack(alignment: .center, spacing: 15) {
+                    Text("CPU")
+                        .font(.headline)
+                        .padding(5)
+                    
+                    ZStack {
+                        
+                        Circle()
+                            .stroke(lineWidth: 5)
+                            .opacity(0.3)
+                            .foregroundColor(.blue)
+                        
+                        Circle()
+                            .trim(from: 0.0, to: CGFloat(cpuStats.usage / 100))
+                            .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round))
+                            .foregroundColor(.blue)
+                            .rotationEffect(.degrees(-90))
+                            .animation(.easeInOut, value: cpuStats.usage)
+                        
+                        
+                        VStack {
+                            Image(systemName: "cpu")
+                                .symbolRenderingMode(.hierarchical)
+                                .font(.system(size: 20))
+                                .foregroundColor(.blue)
+                            
+                            Text("\(String(format: "%.1f", cpuStats.usage))%")
+                                .font(.caption)
+                                .bold()
+                                .foregroundColor(.blue)
+                        }
+                    }
+                    .frame(width: 65, height: 65)
+                    
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("Usage: \(String(format: "%.1f", cpuStats.usage))%")
+                            .bold()
+                            .font(.system(size: 12))
+                        Text("Cores: \(ProcessInfo.processInfo.processorCount)")
+                            .bold()
+                            .font(.system(size: 12))
+                    }
+                }
+                .padding()
+                .frame(width: 130)
+            }
+           // .background(.red)
         }
-        .frame(maxHeight: 200)
     }
 }
 extension DiskStats {
