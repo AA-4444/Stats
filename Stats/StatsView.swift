@@ -31,7 +31,7 @@ import SwiftUI
 //    }
 //}
 
-struct MemoryUsageView: View {
+struct StatsView: View {
     @ObservedObject var memoryStats: MemoryStats
     @ObservedObject var diskStats = DiskStats()
     @StateObject private var wifiMonitor = WiFiMonitor()
@@ -276,7 +276,7 @@ extension DiskStats {
 }
 
 //For canvas
-//struct MemoryUsageView_Previews: PreviewProvider {
+//struct StatsView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        MemoryUsageView(
 //            memoryStats: MockMemoryStats(),

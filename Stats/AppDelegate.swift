@@ -18,22 +18,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         if let button = statusItem?.button {
-            button.image = NSImage(systemSymbolName: "macwindow.and.cursorarrow", accessibilityDescription: "Virtual Memory Usage")
+            button.image = NSImage(systemSymbolName: "macbook.gen2", accessibilityDescription: " ")
             button.action = #selector(togglePopover)
             button.target = self
         }
 
         // Initialize the popover
         popover = NSPopover()
-        popover?.contentViewController = NSHostingController(rootView: MemoryUsageView(memoryStats: memoryStats))
+        popover?.contentViewController = NSHostingController(rootView: StatsView(memoryStats: memoryStats))
         popover?.behavior = .transient
 
-        //MARK:  Start updating virtual memory statistics...
+        //MARK:  Start updating virtual memory stat...
         startUpdatingMemoryUsage()
     }
 
     func startUpdatingMemoryUsage() {
-        // Timer to   update memory every secnd
+        // Timer to   update memory every sec
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
             self.memoryStats.updateStats()
         }
