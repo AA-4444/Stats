@@ -35,7 +35,8 @@ struct MemoryUsageView: View {
     @ObservedObject var memoryStats: MemoryStats
     @ObservedObject var diskStats = DiskStats()
     @StateObject private var wifiMonitor = WiFiMonitor()
-
+    @ObservedObject var cpuStats = CPUStats()
+   
     var body: some View {
         HStack {
            //MARK: Wi-Fi
@@ -90,7 +91,6 @@ struct MemoryUsageView: View {
                       }
                   }
             .padding()
-           // .padding(.bottom,90)
             .frame(width: 130)
 
             
@@ -144,7 +144,6 @@ struct MemoryUsageView: View {
                 }
             }
             .padding()
-         //   .padding(.bottom,90)
             .frame(width: 130)
             
             //MARK: Virtual Memoery Usafe
@@ -217,8 +216,54 @@ struct MemoryUsageView: View {
                 
             }
             .padding()
-         //   .padding(.bottom,90)
             .frame(width: 150)
+            
+            //MARK: CPU
+            VStack(alignment: .center, spacing: 15) {
+                       Text("CPU Usage")
+                           .font(.headline)
+                           .padding(5)
+
+                       ZStack {
+                         
+                           Circle()
+                               .stroke(lineWidth: 5)
+                               .opacity(0.3)
+                               .foregroundColor(.blue)
+
+                             Circle()
+                               .trim(from: 0.0, to: CGFloat(cpuStats.usage / 100))
+                               .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round))
+                               .foregroundColor(.blue)
+                               .rotationEffect(.degrees(-90))
+                               .animation(.easeInOut, value: cpuStats.usage)
+
+                           
+                           VStack {
+                               Image(systemName: "cpu")
+                                   .symbolRenderingMode(.hierarchical)
+                                   .font(.system(size: 20))
+                                   .foregroundColor(.blue)
+
+                               Text("\(String(format: "%.1f", cpuStats.usage))%")
+                                   .font(.caption)
+                                   .bold()
+                                   .foregroundColor(.blue)
+                           }
+                       }
+                       .frame(width: 65, height: 65)
+
+                       VStack(alignment: .leading, spacing: 10) {
+                           Text("Total Usage: \(String(format: "%.1f", cpuStats.usage))%")
+                               .bold()
+                               .font(.system(size: 12))
+                           Text("Cores: \(ProcessInfo.processInfo.processorCount)")
+                               .bold()
+                               .font(.system(size: 12))
+                       }
+                   }
+                   .padding()
+                   .frame(width: 130)
         }
         .frame(maxHeight: 200)
     }
