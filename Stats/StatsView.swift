@@ -5,6 +5,7 @@
 //  Created by Алексей Зарицький on 11/29/24.
 //
 import SwiftUI
+import AppKit
 
 //for canvas
 //class MockMemoryStats: MemoryStats {
@@ -21,25 +22,57 @@ import SwiftUI
 //        return Double(free) / Double(total)
 //    }
 //}
-//
-//class MockDiskStats: DiskStats {
-//    override init() {
-//        super.init()
-//        self.totalSpace = 500  // mock total space in GB
-//        self.freeSpace = 200   // mock free space in GB
-//        self.usedSpace = 300   // mock used space in GB
-//    }
-//}
+
+
+
+class MockDiskStats: DiskStats {
+    override init() {
+        super.init()
+        self.totalSpace = 500  // mock total space in GB
+        self.freeSpace = 200   // mock free space in GB
+        self.usedSpace = 300   // mock used space in GB
+    }
+}
 
 struct StatsView: View {
     @ObservedObject var memoryStats: MemoryStats
     @ObservedObject var diskStats = DiskStats()
     @StateObject private var wifiMonitor = WiFiMonitor()
     @ObservedObject var cpuStats = CPUStats()
+    
+    
+    func kill() {
+          exit(0)
+      }
    
     var body: some View {
         VStack(spacing: 0) {
             
+            //MARK: Top buttons...
+            HStack(spacing: 200) {
+                Button {
+                    kill()
+                } label: {
+                    Image(systemName: "power.circle")
+                        .font(.system(size: 16))
+                        .foregroundColor(.red)
+                }
+                .buttonStyle(PlainButtonStyle())
+                
+                
+                
+                Button {
+                 
+                } label: {
+                    Image(systemName: "gearshape")
+                        .font(.system(size: 16))
+                }
+                .buttonStyle(PlainButtonStyle())
+            }
+            .padding(.top,15)
+           
+            
+            //MARK: set 1
             HStack {
                 //MARK: Wi-Fi
                 VStack(alignment: .center, spacing: 15) {
@@ -151,6 +184,7 @@ struct StatsView: View {
            // .background(.green)
             .padding(.horizontal, 0)
             
+            //MARK: set 2
             HStack {
                 //MARK: Virtual Memoery Usafe
                 VStack(alignment: .center, spacing: 15) {
@@ -272,6 +306,8 @@ struct StatsView: View {
                 .frame(width: 130)
             }
            // .background(.red)
+            
+            
         }
     }
 }
@@ -282,13 +318,19 @@ extension DiskStats {
     }
 }
 
+
+
+
 //For canvas
 //struct StatsView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        MemoryUsageView(
+//        StatsView(
 //            memoryStats: MockMemoryStats(),
 //            diskStats: MockDiskStats()
 //        )
 //        .previewLayout(.sizeThatFits)
 //    }
 //}
+
+
+

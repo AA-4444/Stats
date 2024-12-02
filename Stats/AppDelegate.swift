@@ -23,7 +23,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             button.target = self
         }
 
-        // Initialize the popover
+        
         popover = NSPopover()
         popover?.contentViewController = NSHostingController(rootView: StatsView(memoryStats: memoryStats))
         popover?.behavior = .transient
