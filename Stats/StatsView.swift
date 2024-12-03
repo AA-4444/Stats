@@ -62,7 +62,7 @@ struct StatsView: View {
                 
                 
                 Button {
-                 
+                   
                 } label: {
                     Image(systemName: "gearshape")
                         .font(.system(size: 16))
@@ -315,6 +315,28 @@ extension DiskStats {
     var usedPercentage: Double {
         guard totalSpace > 0 else { return 0 }
         return Double(usedSpace) / Double(totalSpace)
+    }
+}
+
+
+
+
+struct SettingsView: View {
+    @State private var someSetting = true
+
+    var body: some View {
+        VStack(spacing: 15) {
+            Text("Settings")
+                .font(.headline)
+                .padding(.top, 10)
+
+            Toggle("Enable Feature", isOn: $someSetting)
+                .padding()
+
+            Spacer()
+        }
+        .padding()
+        .frame(width: 200, height: 200) 
     }
 }
 

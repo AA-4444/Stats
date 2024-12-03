@@ -13,7 +13,7 @@ struct StatsApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
     var body: some Scene {
-        
+        // No window or content view, only menu bar functionality
         Settings {
             EmptyView()
         }
