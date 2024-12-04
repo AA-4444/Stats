@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<dict>
+<!--
+   Property List.plist
+   Stats
+
+   Created by Алексей Зарицький on 12/4/24.
+   Copyright (c) 2024 ___ORGANIZATIONNAME___. All rights reserved.
+-->
+<key>com.apple.security.network.client</key>
+<true/>
+
+<plist version="1.0">
+<dict/>
+</plist>

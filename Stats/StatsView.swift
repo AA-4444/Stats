@@ -254,6 +254,9 @@ struct StatsView: View {
                         //                        Text("\(memoryStats.total) MB")
                         //                    }
                     }
+                    .onAppear {
+                               memoryStats.updateStats() 
+                           }
                     
                 }
                 .padding()

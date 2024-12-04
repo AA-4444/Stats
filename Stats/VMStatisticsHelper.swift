@@ -8,6 +8,7 @@
 import Darwin
 import Foundation
 
+// Function to fetch system VM 
 func getVMStatistics64() -> vm_statistics64? {
     let hostPort: host_t = mach_host_self()
     var hostSize: mach_msg_type_number_t = mach_msg_type_number_t(
@@ -22,11 +23,14 @@ func getVMStatistics64() -> vm_statistics64? {
     return success ? returnData : nil
 }
 
+
 extension vm_statistics64 {
+    
     var pageSizeInBytes: UInt64 {
         return UInt64(getPageSize())
     }
 
+  
     var freeBytes: UInt64 {
         return UInt64(free_count) * pageSizeInBytes
     }
@@ -42,11 +46,17 @@ extension vm_statistics64 {
     var wireBytes: UInt64 {
         return UInt64(wire_count) * pageSizeInBytes
     }
+
+    
+    var totalBytes: UInt64 {
+        return freeBytes + activeBytes + inactiveBytes + wireBytes
+    }
 }
 
+
 func getPageSize() -> UInt {
-    let hostPort: host_t = mach_host_self()
     var pageSize: vm_size_t = 0
+    let hostPort: host_t = mach_host_self()
     host_page_size(hostPort, &pageSize)
     return UInt(pageSize)
 }
