@@ -39,6 +39,7 @@ struct StatsView: View {
     @ObservedObject var diskStats = DiskStats()
     @StateObject private var wifiMonitor = WiFiMonitor()
     @ObservedObject var cpuStats = CPUStats()
+    var onSettingsButtonClick: () -> Void 
     
     
     func kill() {
@@ -61,9 +62,9 @@ struct StatsView: View {
                 
                 
                 
-                Button {
+                Button(action: onSettingsButtonClick) {
                    
-                } label: {
+              
                     Image(systemName: "gearshape")
                         .font(.system(size: 16))
                 }
