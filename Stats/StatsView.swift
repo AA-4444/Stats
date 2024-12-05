@@ -6,6 +6,7 @@
 //
 import SwiftUI
 import AppKit
+import Foundation
 
 //for canvas
 //class MockMemoryStats: MemoryStats {
@@ -325,24 +326,7 @@ extension DiskStats {
 
 
 
-struct SettingsView: View {
-    @State private var someSetting = true
 
-    var body: some View {
-        VStack(spacing: 15) {
-            Text("Settings")
-                .font(.headline)
-                .padding(.top, 10)
-
-            Toggle("Enable Feature", isOn: $someSetting)
-                .padding()
-
-            Spacer()
-        }
-        .padding()
-        .frame(width: 200, height: 200) 
-    }
-}
 
 
 
