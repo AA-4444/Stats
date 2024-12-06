@@ -49,13 +49,13 @@ struct SettingsView: View {
                             VStack {
                                 Image(systemName: "cpu")
                                     .symbolRenderingMode(.hierarchical)
-                                    .font(.system(size: 20))
+                                    .font(.system(size: 19))
                                     .foregroundColor(.white)
                                 
                                 
                             }
                         }
-                        .frame(width: 65, height: 65)
+                        .frame(width: 60, height: 60)
                         
                         
                     }
@@ -83,13 +83,13 @@ struct SettingsView: View {
                             VStack {
                                 Image(systemName: "cpu")
                                     .symbolRenderingMode(.hierarchical)
-                                    .font(.system(size: 20))
+                                    .font(.system(size: 19))
                                     .foregroundColor(.white)
                                 
                                 
                             }
                         }
-                        .frame(width: 65, height: 65)
+                        .frame(width: 60, height: 60)
                         
                         
                     }
@@ -117,13 +117,13 @@ struct SettingsView: View {
                             VStack {
                                 Image(systemName: "cpu")
                                     .symbolRenderingMode(.hierarchical)
-                                    .font(.system(size: 20))
+                                    .font(.system(size: 19))
                                     .foregroundColor(.white)
                                 
                                 
                             }
                         }
-                        .frame(width: 65, height: 65)
+                        .frame(width: 60, height: 60)
                         
                         
                     }
@@ -163,14 +163,14 @@ struct SettingsView: View {
                             VStack {
                                 Image(systemName: "cpu")
                                     .symbolRenderingMode(.hierarchical)
-                                    .font(.system(size: 20))
+                                    .font(.system(size: 19))
                                     .foregroundColor(Color.mint)
                                     .shadow(color: .mint.opacity(0.7), radius: 10, x: 0, y: 0)
                                 
                                 
                             }
                         }
-                        .frame(width: 65, height: 65)
+                        .frame(width: 60, height: 60)
                         
                         
                     }
@@ -199,14 +199,14 @@ struct SettingsView: View {
                             VStack {
                                 Image(systemName: "cpu")
                                     .symbolRenderingMode(.hierarchical)
-                                    .font(.system(size: 20))
+                                    .font(.system(size: 19))
                                     .foregroundColor(.mint)
                                     .shadow(color: Color.mint.opacity(0.7), radius: 10, x: 0, y: 0)
                                 
                                 
                             }
                         }
-                        .frame(width: 65, height: 65)
+                        .frame(width: 60, height: 60)
                         
                         
                     }
@@ -235,14 +235,14 @@ struct SettingsView: View {
                             VStack {
                                 Image(systemName: "cpu")
                                     .symbolRenderingMode(.hierarchical)
-                                    .font(.system(size: 20))
+                                    .font(.system(size: 19))
                                     .foregroundColor(.mint)
                                     .shadow(color: Color.mint.opacity(0.7), radius: 10, x: 0, y: 0)
                                 
                                 
                             }
                         }
-                        .frame(width: 65, height: 65)
+                        .frame(width: 60, height: 60)
                         
                         
                     }
@@ -254,12 +254,11 @@ struct SettingsView: View {
             
             
             
-            
 
             Spacer()
         }
         .padding()
-        .frame(width: 300, height: 350)
+        .frame(width: 300, height: 330)
     }
 }
 
