@@ -252,13 +252,132 @@ struct SettingsView: View {
                 }
             }
             
+            //MARK: Blue Theme
+            VStack {
+                Text("Neon 2")
+                    .foregroundColor(.white)
+                    .font(.headline)
+                HStack {
+                    
+                    
+                    VStack(alignment: .center, spacing: 15) {
+                        
+                        
+                        ZStack {
+                            
+                            Circle()
+                                .stroke(lineWidth: 5)
+                                .opacity(0.3)
+                                .foregroundColor(Color.blue)
+                            
+                            Circle()
+                                .trim(from: 0.5, to: CGFloat(10 / 10))
+                                .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round))
+                                .foregroundColor(.blue)
+                                .rotationEffect(.degrees(90))
+                                .animation(.easeInOut, value: 100)
+                                .shadow(color: Color.mint.opacity(0.7), radius: 10, x: 0, y: 0)
+                            
+                            
+                            VStack {
+                                Image(systemName: "cpu")
+                                    .symbolRenderingMode(.hierarchical)
+                                    .font(.system(size: 19))
+                                    .foregroundColor(Color.blue)
+                                    .shadow(color: .mint.opacity(0.7), radius: 10, x: 0, y: 0)
+                                
+                                
+                            }
+                        }
+                        .frame(width: 60, height: 60)
+                        
+                        
+                    }
+                    .padding()
+                    .frame(width: 80)
+                    
+                    VStack(alignment: .center, spacing: 15) {
+                        
+                        
+                        ZStack {
+                            
+                            Circle()
+                                .stroke(lineWidth: 5)
+                                .opacity(0.3)
+                                .foregroundColor(.blue)
+                            
+                            Circle()
+                                .trim(from: 0.4, to: CGFloat(10 / 10))
+                                .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round))
+                                .foregroundColor(.blue)
+                                .rotationEffect(.degrees(130))
+                                .animation(.easeInOut, value: 100)
+                                .shadow(color: Color.blue.opacity(0.7), radius: 10, x: 0, y: 0)
+                            
+                            
+                            VStack {
+                                Image(systemName: "cpu")
+                                    .symbolRenderingMode(.hierarchical)
+                                    .font(.system(size: 19))
+                                    .foregroundColor(.blue)
+                                    .shadow(color: Color.blue.opacity(0.7), radius: 10, x: 0, y: 0)
+                                
+                                
+                            }
+                        }
+                        .frame(width: 60, height: 60)
+                        
+                        
+                    }
+                    .padding()
+                    .frame(width: 80)
+                    
+                    VStack(alignment: .center, spacing: 15) {
+                        
+                        
+                        ZStack {
+                            
+                            Circle()
+                                .stroke(lineWidth: 5)
+                                .opacity(0.3)
+                                .foregroundColor(.blue)
+                            
+                            Circle()
+                                .trim(from: 0.2, to: CGFloat(10 / 10))
+                                .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round))
+                                .foregroundColor(.blue)
+                                .rotationEffect(.degrees(200))
+                                .animation(.easeInOut, value: 100)
+                                .shadow(color: Color.blue.opacity(0.7), radius: 10, x: 0, y: 0)
+                            
+                            
+                            VStack {
+                                Image(systemName: "cpu")
+                                    .symbolRenderingMode(.hierarchical)
+                                    .font(.system(size: 19))
+                                    .foregroundColor(.blue)
+                                    .shadow(color: Color.mint.opacity(0.7), radius: 10, x: 0, y: 0)
+                                
+                                
+                            }
+                        }
+                        .frame(width: 60, height: 60)
+                        
+                        
+                    }
+                    .padding()
+                    .frame(width: 80)
+                    
+                }
+            }
+            
             
             
 
             Spacer()
         }
         .padding()
-        .frame(width: 300, height: 330)
+        .frame(width: 300, height: 450)
     }
 }
 
