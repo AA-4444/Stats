@@ -254,7 +254,7 @@ struct SettingsView: View {
             
             //MARK: Blue Theme
             VStack {
-                Text("Neon 2")
+                Text("Base")
                     .foregroundColor(.white)
                     .font(.headline)
                 HStack {
@@ -276,7 +276,7 @@ struct SettingsView: View {
                                 .foregroundColor(.blue)
                                 .rotationEffect(.degrees(90))
                                 .animation(.easeInOut, value: 100)
-                                .shadow(color: Color.mint.opacity(0.7), radius: 10, x: 0, y: 0)
+                              
                             
                             
                             VStack {
@@ -284,7 +284,7 @@ struct SettingsView: View {
                                     .symbolRenderingMode(.hierarchical)
                                     .font(.system(size: 19))
                                     .foregroundColor(Color.blue)
-                                    .shadow(color: .mint.opacity(0.7), radius: 10, x: 0, y: 0)
+                                   
                                 
                                 
                             }
@@ -312,7 +312,7 @@ struct SettingsView: View {
                                 .foregroundColor(.blue)
                                 .rotationEffect(.degrees(130))
                                 .animation(.easeInOut, value: 100)
-                                .shadow(color: Color.blue.opacity(0.7), radius: 10, x: 0, y: 0)
+                                
                             
                             
                             VStack {
@@ -320,7 +320,7 @@ struct SettingsView: View {
                                     .symbolRenderingMode(.hierarchical)
                                     .font(.system(size: 19))
                                     .foregroundColor(.blue)
-                                    .shadow(color: Color.blue.opacity(0.7), radius: 10, x: 0, y: 0)
+                                    
                                 
                                 
                             }
@@ -348,7 +348,7 @@ struct SettingsView: View {
                                 .foregroundColor(.blue)
                                 .rotationEffect(.degrees(200))
                                 .animation(.easeInOut, value: 100)
-                                .shadow(color: Color.blue.opacity(0.7), radius: 10, x: 0, y: 0)
+                                
                             
                             
                             VStack {
@@ -356,7 +356,7 @@ struct SettingsView: View {
                                     .symbolRenderingMode(.hierarchical)
                                     .font(.system(size: 19))
                                     .foregroundColor(.blue)
-                                    .shadow(color: Color.mint.opacity(0.7), radius: 10, x: 0, y: 0)
+                                   
                                 
                                 
                             }
