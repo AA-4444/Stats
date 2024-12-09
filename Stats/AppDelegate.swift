@@ -11,6 +11,7 @@ import Cocoa
 import Foundation
 
 
+
 // Custom NSWindow subclass..
 class CustomSettingsWindow: NSWindow {
     override var canBecomeKey: Bool {
@@ -34,20 +35,28 @@ class SettingsWindowController: NSWindowController {
             defer: false
         )
         
-        
+
         let visualEffectView = NSVisualEffectView()
         visualEffectView.blendingMode = .behindWindow
         visualEffectView.material = .sidebar
         visualEffectView.state = .active
         visualEffectView.frame = window.contentView?.bounds ?? NSRect(x: 0, y: 0, width: 280, height: 300)
         visualEffectView.autoresizingMask = [.width, .height]
+
+        //Dark mdoe
+        visualEffectView.appearance = NSAppearance(named: .darkAqua)
+
         
       
         window.contentView = visualEffectView
+       // visualEffectView.material = .hudWindow
         visualEffectView.addSubview(hostingController.view)
         hostingController.view.frame = visualEffectView.bounds
         hostingController.view.autoresizingMask = [.width, .height]
-
+        
+        //opacity..
+        window.alphaValue = 0.98
+        
         window.isOpaque = false
         window.backgroundColor = .clear
         window.level = .floating
@@ -94,7 +103,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var settingsWindowController: SettingsWindowController?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
-      //MARK: Status bar item
+        // MARK: Status bar item
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         if let button = statusItem?.button {
             button.image = NSImage(systemSymbolName: "macbook.gen2", accessibilityDescription: " ")
@@ -102,28 +111,38 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             button.target = self
         }
 
-        
+        // Set up the stats popover
         statsPopover = NSPopover()
-        statsPopover.contentViewController = NSHostingController(
+        let hostingController = NSHostingController(
             rootView: StatsView(
                 memoryStats: MemoryStats(),
                 onSettingsButtonClick: { [weak self] in self?.showSettingsWindow() }
             )
         )
+        hostingController.view.appearance = NSAppearance(named: .darkAqua) // Force dark mode
+        statsPopover.contentViewController = hostingController
         statsPopover.behavior = .semitransient
     }
 
+    // MARK: Toggle Stats Popover
     @objc func toggleStatsPopover() {
         guard let button = statusItem?.button else { return }
+        
         if statsPopover.isShown {
             statsPopover.performClose(nil)
-           
+
+            // Close settings window if open
             if let windowController = settingsWindowController {
                 windowController.closeWindow()
                 settingsWindowController = nil
             }
         } else {
             statsPopover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
+
+            // Force the popover's appearance to dark mode
+            if let popoverWindow = statsPopover.contentViewController?.view.window {
+                popoverWindow.appearance = NSAppearance(named: .darkAqua)
+            }
         }
     }
 
@@ -144,18 +163,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Settings controller and window...
         settingsWindowController = SettingsWindowController()
         
-       
-        let yOffset: CGFloat = -11  //move window down
+       //MARK: change window position
+        let yOffset: CGFloat = -11
+        let xOffset: CGFloat = -3
         
         // --final frame positions
         let initialFrame = NSRect(
-            x: statsFrame.maxX,
+            x: statsFrame.maxX + xOffset,
             y: statsFrame.minY + yOffset,
+     
             width: 280,
             height: statsFrame.height
         )
         let finalFrame = NSRect(
-            x: statsFrame.maxX + 10,
+            x: statsFrame.maxX + xOffset,
             y: statsFrame.minY + yOffset,
             width: 280,
             height: statsFrame.height
