@@ -41,7 +41,7 @@ struct StatsView: View {
     @StateObject private var wifiMonitor = WiFiMonitor()
     @ObservedObject var cpuStats = CPUStats()
     var onSettingsButtonClick: () -> Void 
-    
+    @EnvironmentObject var themeManager: ThemeManager
     
     func kill() {
           exit(0)
@@ -86,12 +86,15 @@ struct StatsView: View {
                         Circle()
                             .stroke(lineWidth: 5)
                             .opacity(0.3)
-                            .foregroundColor(.blue)
+                           // .foregroundColor(.blue)
+                            .foregroundColor(themeManager.currentTheme.circleColor)
                         
                         Circle()
                             .trim(from: 0.0, to: wifiMonitor.isWiFiActive ? 1.0 : 0.0)
                             .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round))
-                            .foregroundColor(.blue)
+                       //     .foregroundColor(.blue)
+                            .foregroundColor(themeManager.currentTheme.circleColor)
+                                               .shadow(color: themeManager.currentTheme.shadowColor, radius: themeManager.currentTheme.hasShadow ? 10 : 0)
                             .rotationEffect(Angle(degrees: -90))
                             .animation(.easeInOut, value: wifiMonitor.isWiFiActive)
                         
@@ -99,12 +102,15 @@ struct StatsView: View {
                             Image(systemName: "wifi")
                                 .symbolRenderingMode(.hierarchical)
                                 .font(.system(size: 15))
-                                .foregroundColor(wifiMonitor.isWiFiActive ? .blue : .gray)
+                               // .foregroundColor(wifiMonitor.isWiFiActive ? .blue : .gray)
+                                .foregroundColor(wifiMonitor.isWiFiActive ? themeManager.currentTheme.iconColor : .gray)
                             
                             Text(wifiMonitor.isWiFiActive ? "Active" : "Inactive")
                                 .font(.caption)
                                 .bold()
-                                .foregroundColor(.blue)
+                               // .foregroundColor(.blue)
+                                .foregroundColor(themeManager.currentTheme.iconColor)
+                            
                         }
                     }
                     .frame(width: 65, height: 65)
@@ -112,18 +118,25 @@ struct StatsView: View {
                     VStack(alignment: .leading, spacing: 10) {
                         HStack {
                             Image(systemName: "arrow.up")
-                                .foregroundColor(.blue).bold()
+                               // .foregroundColor(.blue)
+                                .bold()
+                                .foregroundColor(themeManager.currentTheme.iconColor)
                             Text(wifiMonitor.uploadSpeed)
                                 .bold()
                                 .font(.system(size: 12))
+                               
+                            
                         }
                         
                         HStack {
                             Image(systemName: "arrow.down")
-                                .foregroundColor(.blue).bold()
+                                //.foregroundColor(.blue)
+                                .bold()
+                                .foregroundColor(themeManager.currentTheme.iconColor)
                             Text(wifiMonitor.downloadSpeed)
                                 .bold()
                                 .font(.system(size: 12))
+                              
                         }
                     }
                 }
@@ -137,6 +150,7 @@ struct StatsView: View {
                         .font(.headline)
                         .padding(5)
                     
+                    
                     ZStack {
                         
                         
@@ -144,26 +158,31 @@ struct StatsView: View {
                         Circle()
                             .stroke(lineWidth: 5)
                             .opacity(0.3)
-                            .foregroundColor(.blue)
+                       //     .foregroundColor(.blue)
+                            .foregroundColor(themeManager.currentTheme.circleColor)
                         
                         Circle()
                             .trim(from: 0.0, to: CGFloat(diskStats.usedPercentage))
                             .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round))
-                            .foregroundColor(.blue)
+                        //    .foregroundColor(.blue)
                             .rotationEffect(.degrees(-90))
                             .animation(.easeInOut, value: diskStats.usedPercentage)
-                        
+                            .foregroundColor(themeManager.currentTheme.circleColor)
+                                               .shadow(color: themeManager.currentTheme.shadowColor, radius: themeManager.currentTheme.hasShadow ? 10 : 0)
+                           
                         
                         VStack {
                             Image(systemName: "opticaldiscdrive")
                                 .symbolRenderingMode(.hierarchical)
                                 .font(.system(size: 20))
-                                .foregroundColor(.blue)
+                               // .foregroundColor(.blue)
+                                .foregroundColor(themeManager.currentTheme.iconColor)
                             
                             Text("\(Int(diskStats.usedPercentage * 100))%")
                                 .font(.caption)
                                 .bold()
-                                .foregroundColor(.blue)
+                                //.foregroundColor(.blue)
+                                .foregroundColor(themeManager.currentTheme.iconColor)
                         }
                     }
                     .frame(width: 65, height: 65)
@@ -173,6 +192,7 @@ struct StatsView: View {
                         
                         Text("Used: \(diskStats.usedSpace) GB").bold()
                             .font(.system(size: 12))
+                        
                         
                         
                         Text("Free: \(diskStats.freeSpace) GB")
@@ -199,25 +219,35 @@ struct StatsView: View {
                         Circle()
                             .stroke(lineWidth: 5)
                             .opacity(0.3)
-                            .foregroundColor(.blue)
+                         //   .foregroundColor(.blue)
+                            .foregroundColor(themeManager.currentTheme.circleColor)
+                                             
+                            
                         
                         Circle()
                             .trim(from: 0.0, to: CGFloat(memoryStats.freePercentage))
                             .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round))
-                            .foregroundColor(.blue)
+                      //      .foregroundColor(.blue)
                             .rotationEffect(Angle(degrees: -90))
+                            .foregroundColor(themeManager.currentTheme.circleColor)
+                                               .shadow(color: themeManager.currentTheme.shadowColor, radius: themeManager.currentTheme.hasShadow ? 10 : 0)
+                           
                         
                         // Memory Chip Icon
                         VStack {
                             Image(systemName: "memorychip")
                                 .symbolRenderingMode(.hierarchical)
                                 .font(.system(size: 20))
-                                .foregroundColor(.blue)
+                               // .foregroundColor(.blue)
+                                .foregroundColor(themeManager.currentTheme.iconColor)
+                                                  
+                              
                             
                             Text("\(Int(memoryStats.freePercentage * 100))%")
                                 .font(.caption)
                                 .bold()
-                                .foregroundColor(.blue)
+                                //.foregroundColor(.blue)
+                                .foregroundColor(themeManager.currentTheme.iconColor)
                         }
                     }
                     .frame(width: 65, height: 65)
@@ -274,26 +304,32 @@ struct StatsView: View {
                         Circle()
                             .stroke(lineWidth: 5)
                             .opacity(0.3)
-                            .foregroundColor(.blue)
+                         //   .foregroundColor(.blue)
+                            .foregroundColor(themeManager.currentTheme.circleColor)
+                                            
                         
                         Circle()
                             .trim(from: 0.0, to: CGFloat(cpuStats.usage / 100))
                             .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round))
-                            .foregroundColor(.blue)
+                          //  .foregroundColor(.blue)
                             .rotationEffect(.degrees(-90))
                             .animation(.easeInOut, value: cpuStats.usage)
+                            .foregroundColor(themeManager.currentTheme.circleColor)
+                                               .shadow(color: themeManager.currentTheme.shadowColor, radius: themeManager.currentTheme.hasShadow ? 10 : 0)
                         
                         
                         VStack {
                             Image(systemName: "cpu")
                                 .symbolRenderingMode(.hierarchical)
                                 .font(.system(size: 20))
-                                .foregroundColor(.blue)
+                               // .foregroundColor(.blue)
+                                .foregroundColor(themeManager.currentTheme.iconColor)
                             
                             Text("\(String(format: "%.1f", cpuStats.usage))%")
                                 .font(.caption)
                                 .bold()
-                                .foregroundColor(.blue)
+                               // .foregroundColor(.blue)
+                                .foregroundColor(themeManager.currentTheme.iconColor)
                         }
                     }
                     .frame(width: 65, height: 65)

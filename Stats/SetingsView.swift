@@ -12,7 +12,7 @@ import AppKit
 
 struct SettingsView: View {
     @State private var someSetting = true
-    
+    @EnvironmentObject var themeManager: ThemeManager
 
     var body: some View {
         VStack(spacing: 15) {
@@ -160,7 +160,7 @@ struct SettingsView: View {
                     .font(.headline)
                 //Theme button ..
                 Button {
-                    
+                    themeManager.currentTheme = Themes.neon
                 } label: {
                     HStack {
                         
@@ -295,7 +295,7 @@ struct SettingsView: View {
                     .font(.headline)
                 //Theme Button ...
                 Button {
-                    
+                    themeManager.currentTheme = Themes.blue
                 } label: {
                     HStack {
                         

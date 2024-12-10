@@ -19,12 +19,15 @@ class CustomSettingsWindow: NSWindow {
     }
 }
 
+
+
 //MARK:  Custom NSWindowController for managing --> settings window...
 class SettingsWindowController: NSWindowController {
     
-    init() {
+    init(themeManager: ThemeManager) {
         //Settings view and its hosting controller
-        let settingsView = SettingsView()
+     //   let settingsView = SettingsView()
+        let settingsView = SettingsView().environmentObject(themeManager)
         let hostingController = NSHostingController(rootView: settingsView)
         
      
@@ -96,11 +99,12 @@ class SettingsWindowController: NSWindowController {
 }
 
 
-//MARK: AppDelegate...
+
 class AppDelegate: NSObject, NSApplicationDelegate {
     var statusItem: NSStatusItem?
     var statsPopover: NSPopover!
     var settingsWindowController: SettingsWindowController?
+    var themeManager = ThemeManager() // Shared ThemeManager
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         // MARK: Status bar item
@@ -117,21 +121,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             rootView: StatsView(
                 memoryStats: MemoryStats(),
                 onSettingsButtonClick: { [weak self] in self?.showSettingsWindow() }
-            )
+            ).environmentObject(themeManager)
         )
         hostingController.view.appearance = NSAppearance(named: .darkAqua) // Force dark mode
         statsPopover.contentViewController = hostingController
         statsPopover.behavior = .semitransient
     }
-
-    // MARK: Toggle Stats Popover
+    
     @objc func toggleStatsPopover() {
         guard let button = statusItem?.button else { return }
         
         if statsPopover.isShown {
             statsPopover.performClose(nil)
 
-            // Close settings window if open
+            //-- Close settings window if open
             if let windowController = settingsWindowController {
                 windowController.closeWindow()
                 settingsWindowController = nil
@@ -139,7 +142,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         } else {
             statsPopover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
 
-            // Force the popover's appearance to dark mode
+            // -- dark mode
             if let popoverWindow = statsPopover.contentViewController?.view.window {
                 popoverWindow.appearance = NSAppearance(named: .darkAqua)
             }
@@ -147,31 +150,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
 
-    
     func showSettingsWindow() {
-        // --If window is already open, close it
         if let windowController = settingsWindowController {
             windowController.closeWindow()
             self.settingsWindowController = nil
             return
         }
-        
-        
+
         let statsWindow = statsPopover.contentViewController?.view.window
         let statsFrame = statsWindow?.frame ?? NSRect.zero
-        
-        // Settings controller and window...
-        settingsWindowController = SettingsWindowController()
-        
-       //MARK: change window position
-        let yOffset: CGFloat = -11
+
+        settingsWindowController = SettingsWindowController(themeManager: themeManager)
+
+        let yOffset: CGFloat = -12
         let xOffset: CGFloat = -3
-        
-        // --final frame positions
+
         let initialFrame = NSRect(
             x: statsFrame.maxX + xOffset,
             y: statsFrame.minY + yOffset,
-     
             width: 280,
             height: statsFrame.height
         )
@@ -181,10 +177,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             width: 280,
             height: statsFrame.height
         )
-        
-        // --Animating window into position...
+
         settingsWindowController?.animateWindow(from: initialFrame, to: finalFrame)
     }
-
 }
-
