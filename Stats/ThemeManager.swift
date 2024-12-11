@@ -24,3 +24,4 @@ struct Themes {
     static let neon = Theme(circleColor: .mint, iconColor: .mint, textColor: .mint, shadowColor: .mint.opacity(0.7), hasShadow: true)
     static let blue = Theme(circleColor: .blue, iconColor: .blue, textColor: .blue, shadowColor: .clear, hasShadow: false)
 }
+// add classic theme and create logic for it
