@@ -40,7 +40,8 @@ struct StatsView: View {
     @ObservedObject var diskStats = DiskStats()
     @StateObject private var wifiMonitor = WiFiMonitor()
     @ObservedObject var cpuStats = CPUStats()
-    var onSettingsButtonClick: () -> Void 
+    var onSettingsButtonClick: () -> Void
+   
     @EnvironmentObject var themeManager: ThemeManager
     
     func kill() {
@@ -94,6 +95,7 @@ struct StatsView: View {
                             .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round))
                        //     .foregroundColor(.blue)
                             .foregroundColor(themeManager.currentTheme.circleColor)
+                          
                                                .shadow(color: themeManager.currentTheme.shadowColor, radius: themeManager.currentTheme.hasShadow ? 10 : 0)
                             .rotationEffect(Angle(degrees: -90))
                             .animation(.easeInOut, value: wifiMonitor.isWiFiActive)
@@ -168,6 +170,7 @@ struct StatsView: View {
                             .rotationEffect(.degrees(-90))
                             .animation(.easeInOut, value: diskStats.usedPercentage)
                             .foregroundColor(themeManager.currentTheme.circleColor)
+                            
                                                .shadow(color: themeManager.currentTheme.shadowColor, radius: themeManager.currentTheme.hasShadow ? 10 : 0)
                            
                         
@@ -230,6 +233,7 @@ struct StatsView: View {
                       //      .foregroundColor(.blue)
                             .rotationEffect(Angle(degrees: -90))
                             .foregroundColor(themeManager.currentTheme.circleColor)
+                         
                                                .shadow(color: themeManager.currentTheme.shadowColor, radius: themeManager.currentTheme.hasShadow ? 10 : 0)
                            
                         
@@ -315,6 +319,7 @@ struct StatsView: View {
                             .rotationEffect(.degrees(-90))
                             .animation(.easeInOut, value: cpuStats.usage)
                             .foregroundColor(themeManager.currentTheme.circleColor)
+                        
                                                .shadow(color: themeManager.currentTheme.shadowColor, radius: themeManager.currentTheme.hasShadow ? 10 : 0)
                         
                         

@@ -29,7 +29,7 @@ struct SettingsView: View {
                 
                 //Theme button
                 Button {
-                    
+                    themeManager.setTheme(Themes.classic)
                 } label: {
                     HStack {
                         

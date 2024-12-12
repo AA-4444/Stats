@@ -105,6 +105,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var statsPopover: NSPopover!
     var settingsWindowController: SettingsWindowController?
     var themeManager = ThemeManager() // Shared ThemeManager
+    
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         // MARK: Status bar item

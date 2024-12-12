@@ -10,14 +10,37 @@ import SwiftUI
 
 class ThemeManager: ObservableObject {
     @Published var currentTheme: Theme = Themes.blue //--> Default theme
+    
+    
+    func setTheme(_ theme: Theme) {
+           currentTheme = theme
+       }
+
+       func colorForProgress(_ progress: Double) -> Color {
+           if currentTheme == Themes.classic {
+               switch progress {
+               case 0..<0.6: // 0-60%
+                   return .green
+               case 0.6..<0.8: // 60-80%
+                   return .yellow
+               case 0.8...1.0: // 80-100%
+                   return .red
+               default:
+                   return .gray
+               }
+           } else {
+               return currentTheme.circleColor
+           }
+       }
 }
-struct Theme {
+struct Theme: Equatable {
     var circleColor: Color
     var iconColor: Color
     var textColor: Color
     var shadowColor: Color
     var hasShadow: Bool
 }
+
 
 struct Themes {
     static let classic = Theme(circleColor: .gray, iconColor: .white, textColor: .white, shadowColor: .clear, hasShadow: false)
