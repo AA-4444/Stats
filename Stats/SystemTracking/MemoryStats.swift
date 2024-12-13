@@ -46,7 +46,7 @@ class MemoryStats: ObservableObject {
 
     func updateStats() {
         if let stats = getVMStatistics64() {
-            let pageSize = stats.pageSizeInBytes
+        //    let pageSize = stats.pageSizeInBytes
             self.free = stats.freeBytes / (1024 * 1024) // Convert to MB
             self.active = stats.activeBytes / (1024 * 1024)
             self.inactive = stats.inactiveBytes / (1024 * 1024)

@@ -16,7 +16,7 @@ class CPUUsage {
         let CPUUsageLock = NSLock()
         
         let hostPort: host_t = mach_host_self()
-        let hostSize = MemoryLayout<natural_t>.size / MemoryLayout<integer_t>.size
+      //  let hostSize = MemoryLayout<natural_t>.size / MemoryLayout<integer_t>.size
         
         let result = host_processor_info(
             hostPort,

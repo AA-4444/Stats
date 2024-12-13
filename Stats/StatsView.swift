@@ -67,8 +67,11 @@ struct StatsView: View {
                 Button(action: onSettingsButtonClick) {
                    
               
-                    Image(systemName: "gearshape")
+//                    Image(systemName: "gearshape")
+//                        .font(.system(size: 16))
+                    Image(systemName: "swatchpalette", variableValue: 1.00)
                         .font(.system(size: 16))
+                   
                 }
                 .buttonStyle(PlainButtonStyle())
             }
@@ -319,7 +322,7 @@ struct StatsView: View {
                             .rotationEffect(.degrees(-90))
                             .animation(.easeInOut, value: cpuStats.usage)
                             .foregroundColor(themeManager.currentTheme.circleColor)
-                        
+                          
                                                .shadow(color: themeManager.currentTheme.shadowColor, radius: themeManager.currentTheme.hasShadow ? 10 : 0)
                         
                         
